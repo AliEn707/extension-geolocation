@@ -1,0 +1,15 @@
+{
+  "name": "extension-geolocation",
+  "url": "https://github.com/AliEn707/extension-geolocation.git",
+  "license": "MIT",
+  "tags": ["mobile", "geolocation"],
+  "description": "",
+  "version": "1.0.0",
+  "classPath" : "source",
+  "releasenote": "",
+  "contributors": ["wsandwitch"],
+  "dependencies": {
+     "openfl": "",
+	 "android6permissions": ""
+  }
+}
