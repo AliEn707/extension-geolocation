@@ -21,6 +21,12 @@ class Geolocation {
 	#end
 	}
 	
+	public static function stopService (cb:Dynamic->Void, dist:Float, time:Int):Void{
+	#if mobile		
+		extension_geolocation_stop_service();
+	#end
+	}
+	
 	private static function checkPermission(action:Void->Void, p:String){
 	#if android
 		if (!Permissions.hasPermission(p)){
@@ -34,8 +40,10 @@ class Geolocation {
 	
 	#if android
 	private static var extension_geolocation_start_service = JNI.createStaticMethod ("org.haxe.extension.Geolocation", "startService", "(Lorg/haxe/lime/HaxeObject;FI)V");
+	private static var extension_geolocation_stop_service = JNI.createStaticMethod ("org.haxe.extension.Geolocation", "stopService", "()V");
 	#elseif ios
 	private static var extension_geolocation_start_service = CFFI.load ("extension_geolocation", "extension_geolocation_sample_method", 1);
+	private static var extension_geolocation_stop_service = CFFI.load ("extension_geolocation", "extension_geolocation_sample_method", 1);
 	#end
 }
 

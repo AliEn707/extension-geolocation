@@ -96,6 +96,15 @@ public class Geolocation extends Extension {
 	}
 	
 	
+	public static void stopService(){
+        Extension.mainActivity.runOnUiThread(new Runnable() {
+            public void run() {
+                LocationManager mLocationManager = (LocationManager) Extension.mainContext.getSystemService(Context.LOCATION_SERVICE);
+                mLocationManager.removeUpdates(mLocationListener);
+            }
+        });
+	}
+	
 	/**
 	 * Called when an activity you launched exits, giving you the requestCode 
 	 * you started it with, the resultCode it returned, and any additional data 
