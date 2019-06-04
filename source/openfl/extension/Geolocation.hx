@@ -12,18 +12,25 @@ import lime.system.CFFI;
 #end
 
 class Geolocation {
+	private static var _running:Bool = false;
 	
 	public static function startService (cb:Dynamic->Void, dist:Float, time:Int):Void{
-	#if mobile		
+		if (_running)
+			return;
+	#if mobile	
 		if (checkPermission(startService.bind(cb, dist, time), Permissions.ACCESS_FINE_LOCATION)){
 			extension_geolocation_start_service(new GeoCallback(cb), dist, time);
 		}
+		_running = true;
 	#end
 	}
 	
 	public static function stopService (cb:Dynamic->Void, dist:Float, time:Int):Void{
+		if (!_running)
+			return;
 	#if mobile		
 		extension_geolocation_stop_service();
+		_running = false;
 	#end
 	}
 	
