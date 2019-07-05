@@ -71,10 +71,12 @@ public class Geolocation extends Extension {
         
         @Override 
         public void onProviderEnabled(String provider) { 
+            callback.call("isEnabled", new Object[] { true });
         } 
         
         @Override 
         public void onProviderDisabled(String provider) { 
+            callback.call("isEnabled", new Object[] { false });
         }
     };
     

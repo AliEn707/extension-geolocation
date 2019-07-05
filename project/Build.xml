@@ -17,11 +17,12 @@
 	
 	<set name="DEBUGEXTRA" value="-debug" if="fulldebug" />
 	
-	<target id="NDLL" output="${LIBPREFIX}extension_geolocation${MSVC_LIB_VERSION}${DEBUGEXTRA}${LIBEXTRA}" tool="linker" toolid="${STD_MODULE_LINK}">
+	<target id="NDLL" output="${LIBPREFIX}extension_geolocation" tool="linker" toolid="${STD_MODULE_LINK}">
 		
 		<outdir name="../ndll/${BINDIR}"/>
 		<ext value=".ndll" if="windows || mac || linux"/>
 		<files id="common"/>
+		<files id="ios" if="ios" />
 		
 	</target>
 	
