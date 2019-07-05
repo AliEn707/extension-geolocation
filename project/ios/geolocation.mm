@@ -23,13 +23,15 @@
 
 @implementation Geolocation
 
-- (void)init {
-    [super init];
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    geocoder = [[CLGeocoder alloc] init];
-    NSLog(@"initCamera funtzioan, CameraMic.mm fitxategian");
+- (Geolocation*)init {
+    if (self = [super init]){
+	    locationManager = [[CLLocationManager alloc] init];
+	    locationManager.delegate = self;
+	    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+	    geocoder = [[CLGeocoder alloc] init];
+	    NSLog(@"haxe[ios]: geolocation inited");
+	}
+	return self;
 }
 
 - (void)start:(callback_data)cb {
@@ -39,7 +41,7 @@
 }
 
 - (void)stop {
-// stopping locationManager from fetching again
+// stopping locationManager 
     [locationManager stopUpdatingLocation];
 }
 
@@ -57,19 +59,18 @@
 namespace extension_geolocation{
 
 	Geolocation *loc=0;
-    int started
+	int started
     
 	int startService(callback_data cb){
 		if(!loc){
-            loc = [Geolocation alloc];
-            [loc init];
-        }
-        [loc start:cb];
+			loc = [[Geolocation alloc] init];
+		}
+		[loc start:cb];
 	}
 
 	void startService(){
-        if (loc)
-            [loc stop];
+		if (loc)
+			[loc stop];
 	}
 
 }
